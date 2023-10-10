@@ -1,0 +1,53 @@
+
+<!-- products.handlebars -->
+<div class="d-flex justify-content-between container">
+    <form>
+        <div class="input-group mb-3 prev-next">
+            <input type="text" class="form-control" placeholder="Buscar producto" name="filter" value="{{filter}}">
+            <div class="input-group-append">
+                <button class="btn agregar-carrito" type="submit">Buscar</button>
+            </div>
+        </div>
+    </form>
+    <div class="input-group mb-6 prev-next">
+        <form action="/products" method="GET">
+            <input type="number" placeholder="Cantidad" id="limit" name="limit" value={{productsPerPage}}>
+            <div class="input-group-append">
+                <button type="submit" class="btn agregar-carrito">Aplicar</button>
+            </div>
+        </form>
+    </div>
+    <div class="btn-group prev-next" id="prod" role="group" aria-label="Paginación">
+        <button type="button" class="btn agregar-carrito" {{#if paginationprev}} onclick="window.location.href=`/products?page={{paginationprev}}#prod`" {{else}} disabled {{/if}}>Prev</button>
+        <button type="button" class="btn agregar-carrito" {{#if paginationnext}} onclick="window.location.href=`/products?page={{paginationnext}}#prod`" {{else}} disabled {{/if}}>Next</button>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        {{#each products}}
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <img class="card-img-top" src="{{thumbnail}}" alt="{{title}}">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title">{{title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">${{price}}</h6>
+                    <a href="{{link}}" class="btn agregar-carrito stretched-link mt-2">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+        <div class="container prev-next">
+        <div class=" justify-content-center">
+            <div class="btn-group" role="group" aria-label="Paginación">
+                <button type="button" class="btn agregar-carrito" {{#if paginationprev}} onclick="window.location.href=`/products?page={{paginationprev}}#prod`" {{else}} disabled {{/if}}>Prev</button>
+                <button type="button" class="btn agregar-carrito" {{#if paginationnext}} onclick="window.location.href=`/products?page={{paginationnext}}#prod`" {{else}} disabled {{/if}}>Next</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="module" src={{script2}}></script>

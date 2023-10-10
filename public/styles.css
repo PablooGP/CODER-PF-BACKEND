@@ -1,0 +1,946 @@
+* body {
+    background-color: white;
+    width: 100%;
+    min-height: 110vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav,
+main,
+footer {
+    width: 100%;
+}
+
+.submit{
+    background-color: orange;
+    color: white;
+    width: 100%;
+    border-radius: 20px;
+    margin: 5px;
+}
+
+.session {
+    font-size: 18px;
+    justify-content: space-around;
+    transition: 0.3s;
+    transition: 0.3s;
+    padding: 15px;
+    
+}
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 450px; /* Esto centra el contenido verticalmente */
+}
+.form-container {
+    text-align: center;
+}
+
+.row>* {
+    flex-shrink: 0; 
+    width: 33%!important; 
+    max-width: 100%; 
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top: var(--bs-gutter-y);
+    justify-content: space-evenly;
+}
+
+.bkg {
+    background-color: #fff;
+    height: 600px;
+}
+
+.d-flex {
+    width: 100%;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.navbar {
+    padding: 30px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
+    background: rgb(0, 110, 255);
+    background: linear-gradient(0deg, rgb(0, 157, 255) 0%, rgb(0, 94, 255) 100%);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+
+
+}
+
+.navbar img {
+    width: 300px;
+}
+
+.navbar ul {
+    font-size: 18px;
+    justify-content: space-around;
+    transition: 0.3s;
+}
+
+
+
+.navbar ul li {
+    transition: 0.3s;
+    padding: 15px;
+}
+
+.navbar ul li:hover {
+    font-weight: bold;
+    transform: scale(1.1);
+    transition: 0.3s;
+
+}
+
+
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.card {
+    border-radius: 20px;
+    width: 350px;
+    border: none;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
+}
+
+.card-img-top {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.prev-next {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.agregar-carrito {
+    background-color: orange;
+    color: white;
+    width: 100%;
+    border-radius: 20px;
+    margin: 5px;
+}
+.agregar-carrito:hover {
+    background-color: rgb(139, 139, 139);
+    color: white;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.sin-stock {
+    background-color: rgba(255, 166, 0, 0.493);
+    color: white;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.usuario {
+    margin-top: 20px;
+}
+
+.title {
+    margin-top: 30px;
+    font-size: 30px;
+}
+
+.cart-img-top {
+    width: 50px;
+    margin: 20px;
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+h3 {
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+h2 {
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+h5 {
+    color: orange;
+    font-size: 18px;
+}
+
+main {
+    flex-grow: 1;
+    background-color: rgb(255, 160, 160);
+}
+
+img {
+    object-fit: contain;
+}
+
+.carousel-inner{
+    border-bottom: 5px solid  orange;
+}
+
+.bannerTop {
+    width: 100%;
+    height: 700px;
+    margin-top: 100px;
+
+
+}
+
+.bannerTop img {
+    width: 100%;
+    object-fit: cover;
+    margin: none;
+}
+
+/* Chat */
+
+ul {
+    list-style: none;
+    word-wrap: break-word;
+}
+
+/* Pages */
+
+.pages {
+    height: 500px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.page {
+    height: 500px;
+    position: absolute;
+    width: 100%;
+}
+
+/* Login Page */
+
+.login.page {
+    background-color: #000;
+}
+
+.login.page .form {
+    height: 100px;
+    margin-top: -100px;
+    position: absolute;
+
+    text-align: center;
+    top: 50%;
+    width: 100%;
+}
+
+.login.page .form .usernameInput {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    outline: none;
+    padding-bottom: 15px;
+    text-align: center;
+    width: 400px;
+}
+
+.login.page .title {
+    font-size: 200%;
+}
+
+.login.page .usernameInput {
+    font-size: 200%;
+    letter-spacing: 3px;
+}
+
+.login.page .title,
+.login.page .usernameInput {
+    color: #fff;
+    font-weight: 100;
+}
+
+/* Chat page */
+
+.chat.page {
+    display: none;
+}
+
+/* Font */
+
+.messages {
+    font-size: 150%;
+}
+
+.inputMessage {
+    font-size: 100%;
+}
+
+.log {
+    color: gray;
+    font-size: 70%;
+    margin: 5px;
+    text-align: center;
+}
+
+/* Messages */
+
+.chatArea {
+    height: 100%;
+    padding-bottom: 60px;
+
+}
+
+.messages {
+    height: 100%;
+    margin: 0;
+    overflow-y: scroll;
+    padding: 10px 20px 10px 20px;
+}
+
+.message.typing .messageBody {
+    color: gray;
+}
+
+.username {
+    font-weight: 700;
+    overflow: hidden;
+    padding-right: 15px;
+    text-align: right;
+    text-shadow: #000;
+}
+
+/* Input */
+
+.inputMessage {
+    border: 2px solid #f79400;
+    bottom: 0;
+    height: 60px;
+    left: 0;
+    outline: none;
+    padding-left: 10px;
+    position: absolute;
+    right: 0;
+    width: 98vw;
+    font-size: 18px;
+    border-radius: 20px;
+    margin: 0 10px 10px 10px;
+}
+
+.invisible-button {
+    border: none;
+    outline: 0px;
+    background-color: transparent;
+}
+
+.input-form {
+    border: none;
+    background-color: #f0f0f0;
+    color: #333333;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px;
+    width: 100%;
+}
+
+/* Estilos para la sección de productos */
+.products {
+    padding: 60px 0;
+    display: flexbox;
+    flex-wrap: wrap;
+
+}
+
+.section-title {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.product {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 0 0 calc(33.33% - 40px);
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    width: 30%;
+
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.product-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para la sección de contacto */
+.contact {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.contact-description {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+
+
+/* Aca abajo insert mi CSS para la pagina /products/:pid  */
+
+.prodTitle-creator {
+    position: absolute;
+    width: 100%;
+    height: 5%;
+    left: calc(-50% - 10px);
+    top: -6.5%;
+
+    font-family: 'Kreon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.prodDescription-creator {
+    position: absolute;
+    width: 70%;
+    height: 75%;
+    left: calc(50% + 10px);
+    /*left: calc(50% - 316px/2 + 178px);*/
+    top: 0px;
+
+    font-family: 'Kreon';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 28px;
+
+    color: rgba(0, 0, 0, 0.86);
+}
+
+.prodEnvioTitle-creator {
+    position: absolute;
+    width: 316px;
+    height: 40px;
+    left: calc(50% - 316px/2);
+    top: calc(50% - 40px/2);
+
+    font-family: 'Kreon';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.cotizadorAndreani {
+    position: absolute;
+    width: 316px;
+    height: 40px;
+    left: calc(50% - 316px/2 + 178px);
+    top: 380px;
+
+    background: rgba(34, 174, 31, 0.75);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.cotizadorOca {
+    position: absolute;
+    width: 316px;
+    height: 40px;
+    left: calc(50% - 316px/2 + 178px);
+    top: 428px;
+
+    background: rgba(34, 174, 31, 0.75);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.divisor1 {
+    position: absolute;
+    width: 60%;
+    height: 1px;
+
+    left: calc(50% + 10px + 2vh);
+    bottom: calc(0px + 13.5%);
+
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 8px;
+}
+
+.divisor2 {
+    position: absolute;
+    width: 62vh;
+    height: 1px;
+    left: calc(50% - 62vh/2);
+    top: calc(45vh + 150px);
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 8px;
+}
+
+.cotizador {
+    position: absolute;
+    width: 316px;
+    height: 40px;
+    left: calc(50% - 316px/2 + 178px);
+    top: 332px;
+
+    background: rgba(198, 198, 198, 0.5);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+}
+
+.cotizadorTextoMain {
+    position: absolute;
+    width: 174px;
+    height: 40px;
+    left: 0px;
+    top: calc(50% - 40px/2);
+
+    font-family: 'Kreon';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 25px;
+    align-items: center;
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    color: #000000;
+}
+
+.cotizadorInput {
+    position: absolute;
+    width: 138px;
+    height: 32px;
+    right: 4px;
+    top: calc(50% - 32px/2);
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+
+    background: rgba(198, 198, 198, 0.5);
+    border-radius: 8px;
+}
+
+.prodPrice-creator {
+    position: absolute;
+    width: 75%;
+    height: 42px;
+
+    left: calc(50% + 10px);
+    bottom: calc(15%);
+
+    font-family: 'Kreon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 3svh;
+    line-height: 38px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: left;
+    color: rgba(0, 0, 0, 0.75);
+
+}
+
+.addStockBackground {
+    position: absolute;
+    width: 15%;
+    height: 10%;
+    left: calc(50% + 10px);
+    bottom: calc(0px);
+
+    background: rgba(198, 198, 198, 0.01);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+}
+
+.addStock-mas {
+    position: absolute;
+    width: 5%;
+    height: 5%;
+    left: calc(50% + 10px + 10%);
+    bottom: calc(5%);
+
+    display: flex;
+    font-size: 1.4svh;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-weight: 800;
+
+    background: rgba(221, 221, 221, 0.5);
+    border-radius: 0px 8px 0px 0px;
+}
+
+.addStock-menos {
+    position: absolute;
+    width: 5%;
+    height: 5%;
+    left: calc(50% + 10px + 10%);
+    bottom: calc(0px);
+
+    display: flex;
+    font-size: 1.4svh;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-weight: 800;
+
+    background: rgba(221, 221, 221, 0.5);
+    border-radius: 0px 0px 8px 0px;
+}
+
+.addStock-input {
+    position: absolute;
+    font-size: 13px;
+    width: 10%;
+    height: 10%;
+    left: calc(50% + 10px);
+    bottom: calc(0px);
+
+    display: flex;
+    font-size: 3svh;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 8px 0px 0px 8px;
+}
+
+.container-top {
+    width: 100%;
+    height: calc(60svh + 100px);
+}
+
+#productContainer {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 100px;
+    width: calc(60svh - 100px);
+    height: calc(60svh - 100px);
+}
+
+.prodImage-big {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /*calc(100% - 100px);*/
+
+
+    left: calc(-50% - 10px);
+
+    border: 0;
+    outline: 0;
+    background: transparent
+}
+
+.prodAddButton {
+    position: absolute;
+    width: 50%;
+    height: 10%;
+    left: calc(50% + 10px + 20%);
+    bottom: calc(0px);
+
+    border-radius: 8px;
+
+    font-family: 'Kreon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.8svh;
+    line-height: 0px;
+    display: block;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    border: none;
+
+    color: #FFFFFF;
+}
+
+.prodAddButton-enabled {
+    background: #ffc400;
+    scale: 1;
+    transition: 0.3s;
+
+}
+.prodAddButton-enabled:hover {
+    background: #383838;
+    color: white;
+    scale: 1.1;
+    transition: 0.3s;
+}
+
+/* localhost:3000/carts */
+
+.cartContainer {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    padding: 30px;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.separador {
+    position: relative;
+    width: 100%;
+    height: 15px;
+}
+
+.deleteButton {
+    position: absolute;
+    width: 100px;
+    height: 24px;
+    right: 6px;
+    bottom: 6px;
+
+    font-family: 'Kreon';
+    font-style: bold;
+    font-weight: 1000;
+    font-size: 11px;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    color: #FFFFFF;
+
+    background:  #FFC107;
+    border-radius: 6px;
+}
+
+.deleteButton:hover {
+    background-color: #383838;
+    color: #FFFFFF;
+    transition: 0.3s;
+}
+
+.removeButton {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    right: 36px;
+    bottom: 36px;
+
+    background: rgba(153, 153, 153, 0.93);
+    border-radius: 6px;
+
+    font-family: 'Kreon';
+    font-style: bold;
+    font-weight: 1000;
+    font-size: 22px;
+    line-height: 0px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    color: #FFFFFF;
+}
+
+.addButton {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    right: 6px;
+    bottom: 36px;
+
+    font-family: 'Kreon';
+    font-style: bold;
+    font-weight: 1000;
+    font-size: 22px;
+    line-height: 0px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    background: rgba(153, 153, 153, 0.93);
+    border-radius: 6px;
+
+    color: #FFFFFF;
+}
+
+.totalText {
+    position: absolute;
+    width: 313px;
+    height: 24px;
+    left: 200px;
+    top: 120px;
+
+    font-family: 'Kreon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+
+}
+
+.cartProductTitleText {
+    position: absolute;
+    width: 304px;
+    height: 20px;
+    left: 200px;
+    top: 6px;
+
+    font-family: 'Kreon';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+
+    color: #FFC107;
+}
+
+.cartAmountProductsText {
+    position: absolute;
+    width: 304px;
+    height: 20px;
+    left: 200px;
+    top: 30px;
+
+    font-family: 'Kreon';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+}
+
+.cartImageProduct {
+    position: absolute;
+    width: 125px;
+    height: 138px;
+    top: calc(50% - 138px/2);
+
+    background: #ffffff;
+    border-radius: 8px;
+    outline: 0;
+    border: 0;
+}
+
+.checkoutButton {
+    position: relative;
+    font-size: 18px!important;
+    width: 200px;
+    height: 50px;
+    left: 5px;
+    background: #FFC107;
+    border-radius: 6px;
+    margin: 15px;
+
+    font-family: 'Kreon';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ffffff;
+}
+.checkoutButton:hover {
+
+    background: #b3b3b3;
+    transition: 0.3s;
+
+}
+
+/* Estilos para la sección de promociones */
+.promotions {
+    background-color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.promotion {
+    text-align: center;
+    vertical-align: top;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 20px;
+    width: 30%;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.promotion-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.promotion-description {
+    font-size: 16px;
+}

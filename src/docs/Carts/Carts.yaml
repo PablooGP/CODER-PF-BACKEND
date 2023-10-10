@@ -1,0 +1,98 @@
+paths:
+  /api/carts/:
+    get:
+      summary: Obtiene todos los carritos
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Los carritos fueron obtenidos correctamente de la base de datos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cart'
+        "500":
+          description: Error interno del servidor debido a una consulta defectuosa
+
+    post:
+      summary: Crea un nuevo carrito
+      tags:
+        - Carts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartInput'  # Referencia al esquema de entrada para el carrito
+
+  /api/carts/{cartId}:
+    get:
+      summary: Obtiene un carrito por su ID
+      tags:
+        - Carts
+      parameters:
+        - name: cartId
+          in: path
+          required: true
+          description: ID del carrito que se debe buscar
+          schema:
+            type: string
+      responses:
+        "200":
+          description: El carrito fue obtenido correctamente de la base de datos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        "404":
+          description: El carrito no fue encontrado
+
+    put:
+      summary: Actualiza un carrito por su ID
+      tags:
+        - Carts
+      parameters:
+        - name: cartId
+          in: path
+          required: true
+          description: ID del carrito que se debe actualizar
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartInput'  # Referencia al esquema de entrada para el carrito
+        "404":
+          description: El carrito no fue encontrado
+
+components:
+  schemas:
+    Cart:
+      # Propiedades del esquema aquí...
+
+    CartInput:
+      type: object
+      properties:
+        products:
+          type: array
+          description: Lista de productos en el carrito
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                description: ID del producto
+              units:
+                type: number
+                description: Cantidad de unidades
+            example:
+              product: "646d49e5777f9e14312711e5"
+              units: 3
+      example:
+        products:
+          - product: "646d49e5777f9e14312711e5"
+            units: 3

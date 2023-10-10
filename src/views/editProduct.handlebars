@@ -1,0 +1,33 @@
+    <main class="d-flex justify-content-center align-items-center bkg">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 d-flex flex-column">
+                    <h3>Product editor</h3>
+                    <form id="product-form" action= "/api/products/edit/{{productid}}"  , method="GET">
+                        <fieldset class="mb-2">
+                            <label for="productTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" name="title" id="title" value={{title}} />
+                        </fieldset>
+                                <fieldset class="mb-2">
+                                    <label for="productDescription" class="form-label">Description</label>
+                                    <input type="text" class="form-control" name="description" id="description" value={{description}} />
+                                </fieldset>
+                                <fieldset class="mb-2">
+                                    <label for="productPrice" class="form-label">Price</label>
+                                    <input type="number" class="form-control" name="price" id="price" value={{price}} />
+                                </fieldset>
+                                <fieldset class="mb-2">
+                                    <label for="productStock" class="form-label">Stock</label>
+                                    <input type="number" class="form-control" name="stock" id="stock" value={{stock}} />
+                                </fieldset>
+                                <div class="mb-2">
+                                    <label for="productPhoto" class="form-label">Photo</label>
+                                    <input type="text" class="form-control" name="thumbnail" id="thumbnail" aria-describedby="photoSource" value={{photo}} />
+                                </div>
+                                <button id='newProduct' type="submit" class="btn btn-warning mt-2">Save Product Changes</button>
+                            </form>
+                            </div>
+                        <div id="productTable" class="col-6"></div>
+                    </div>
+                </div>
+            </main>

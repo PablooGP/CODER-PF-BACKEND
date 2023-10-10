@@ -1,0 +1,119 @@
+paths:
+  /api/products/:
+    get:
+      summary: Obtiene todos los productos
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Los productos fueron obtenidos correctamente de la base de datos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        "500":
+          description: Error interno del server, por query defectuosa
+    post:
+      summary: Crea un producto
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'  # Referencia al esquema de entrada
+
+  /api/products/{pid}:
+    get:
+      summary: Obtiene un producto a partir de pid
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del producto que se debe solicitar
+          schema:
+            type: string
+      responses:
+        "200":
+          description: El producto fue obtenido correctamente de la base de datos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+
+    put:
+      summary: Se actualiza un producto segun pid
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: El id del producto
+          schema:
+            type: string
+      responses:
+        "200":
+          description: El producto fue actualizado correctamente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Id autogenerado de mongo
+        title:
+          type: string
+          description: Titulo del producto
+        description:
+          type: string
+          description: Descripcion del producto
+        price:
+          type: number
+          description: Precio del producto
+        thumbnail:
+          type: string
+          description: Imagen del producto
+        stock:
+          type: number
+          description: Cantidad que hay en stock
+      example:
+        _id: "646d49e5777f9e14312711e9"
+        title: "Mezcla Gumbo del chef Anton"
+        description: "Pagando con A convenir (Efectivo, Transferencia/deposito, Link de pago) con un 10% de descuento."
+        price: 2000
+        thumbnail: "../public/img/10.jpg"
+        stock: 86
+    
+    ProductInput:  # Nuevo esquema para la entrada de datos al crear un producto
+      type: object
+      properties:
+        title:
+          type: string
+          description: Titulo del producto
+        description:
+          type: string
+          description: Descripcion del producto
+        price:
+          type: number
+          description: Precio del producto
+        thumbnail:
+          type: string
+          description: Imagen del producto
+        stock:
+          type: number
+          description: Cantidad en stock
+

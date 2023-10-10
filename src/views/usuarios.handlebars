@@ -1,0 +1,14 @@
+<h1>Lista de Usuarios</h1>
+<div class="container">
+        <div class="user-cards row">
+            {{#each users}}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Nombre: {{nombre}}</h5>
+                    <p class="card-text">Apellido: {{apellido}}</p>
+                    <p class="card-text">Rol: {{rol}}</p>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+</div>

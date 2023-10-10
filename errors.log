@@ -1,0 +1,7 @@
+fatal: Fatal logger test 1
+fatal: Fatal logger test 1
+error: Error logger test 2
+warning: Warning logger test 3
+fatal: Fatal logger test 1
+error: Error logger test 2
+warning: Warning logger test 3

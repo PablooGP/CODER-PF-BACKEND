@@ -1,0 +1,33 @@
+    <main class="d-flex justify-content-center align-items-center bkg">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 d-flex flex-column">
+                    <h3>Product register</h3>
+                    <form id="productsForm" action="/new-product", method="POST">
+                        <fieldset class="mb-2">
+                            <label for="productTitle" class="form-label">Title</label>
+                            <input type="text" class="form-control" name="title" id="productTitle" />
+                        </fieldset>
+                                <fieldset class="mb-2">
+                                    <label for="productDescription" class="form-label">Description</label>
+                                    <input type="text" class="form-control" name="description" id="productDescription" />
+                                </fieldset>
+                                <fieldset class="mb-2">
+                                    <label for="productPrice" class="form-label">Price</label>
+                                    <input type="number" class="form-control" name="price" id="productPrice" />
+                                </fieldset>
+                                <fieldset class="mb-2">
+                                    <label for="productStock" class="form-label">Stock</label>
+                                    <input type="number" class="form-control" name="stock" id="productStock" />
+                                </fieldset>
+                                <div class="mb-2">
+                                    <label for="productPhoto" class="form-label">Photo</label>
+                                    <input type="text" class="form-control" name="url_photo" id="productPhoto" aria-describedby="photoSource"/>
+                                </div>
+                                <button id='newProduct' type="submit" class="btn btn-danger mt-2">Save product</button>
+                            </form>
+                            </div>
+                        <div id="productTable" class="col-6"></div>
+                    </div>
+                </div>
+            </main>

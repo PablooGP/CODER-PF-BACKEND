@@ -1,0 +1,41 @@
+<div class="container title">
+    {{title}}
+</div>
+<div class="container usuario">
+    <div>
+
+    </div>
+    <div>
+        <img src={{photo}} alt="Avatar" class="avatar">
+        <h2>{{name}}
+            {{#if last_name}}
+            {{last_name}}
+            {{else}}
+            Apellido desconocido</h2>
+        {{/if}}
+    </div>
+</div>
+<div class="container">
+    <div class="list-group">
+        <div class="d-flex flex-column " id="productList">
+            {{#each products}}
+            <li>
+                <div class="d-flex" style="width: 500px">
+                    <div>
+                        <img src={{this.photo}} class="cart-img-top">
+                    </div>
+                    <div class="card-body">
+                        <h5>{{this.name}}</h5>
+                        <p class="card-text">{{this.price}}</p>
+                    </div>
+                </div>
+
+            </li>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+<button id="checkoutButton" class="btn checkoutButton" type="button">CHECKOUT</button>
+
+<script src={{script2}}></script>

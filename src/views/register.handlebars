@@ -1,0 +1,19 @@
+    <main class="d-flex justify-content-center align-items-center bkg">
+        <div class="center-content">
+            <div class="row">
+                <div class="col-6 d-flex flex-column">
+                    <h3>User register</h3>
+                    <form action="api/auth/register?redirect=true" method="POST" class="form-container" enctype="multipart/form-data">
+                        <input placeholder="Nombre" type="text" class="input-form" id="first_name" name="first_name" required>
+                        <input placeholder="Apellido" type="text" class="input-form" id="last_name" name="last_name" required>
+                        <input placeholder="Foto de perfil" type="file" class="input-form" id="photo" name="image" required>
+                        <input placeholder="Email" type="email" class="input-form" id="mail" name="mail" required>
+                        <input placeholder="Contraseña" type="password" class="input-form" id="password" name="password" required>
+                        <br><br>
+                        <button type="submit" <a class="btn agregar-carrito">Register</button>
+                    </form>
+                </div>
+                <div id="productTable" class="col-6"></div>
+            </div>
+        </div>
+    </main>
