@@ -100,7 +100,7 @@ const updateView = async () => {
 
         anchor.href = `/products/${pid}`
         button.addEventListener("click", async (data) => {
-            const request = await fetch(`/api/carts/${sessionStorage.getItem("userCart")}/product/${pid}/${units}`, {
+            const request = await fetch(`/api/carts/${localStorage.getItem("userCart")}/product/${pid}/${units}`, {
                 method: "PUT",
                 body: JSON.stringify({units: units}),
                 headers: {
@@ -111,7 +111,7 @@ const updateView = async () => {
             const response = request.json()
 
             if (request.status == 200) {
-                socket.emit("getCartContent", sessionStorage.getItem("userCart"))
+                socket.emit("getCartContent", localStorage.getItem("userCart"))
                 Swal.fire({
                     title: `Product added successfully`,
                     icon: 'error',

@@ -19,16 +19,16 @@ socket.on("cartUpdated", (cartContent) => {
 })
 
 socket.on("userCartId", (cartId) => {
-    sessionStorage.setItem("userCart", cartId)
+    localStorage.setItem("userCart", cartId)
 })
 
-socket.emit("getCartContent", sessionStorage.getItem("userCart"))
-if (sessionStorage.getItem("userCart") == undefined) {
+socket.emit("getCartContent", localStorage.getItem("userCart"))
+if (localStorage.getItem("userCart") == undefined) {
     const req = fetch("/api/carts", {
         method: "POST"
     })
     .then(res => res.json())
     .then(response => {
-        sessionStorage.setItem("userCart", response.id)
+        localStorage.setItem("userCart", response.id)
     })
 }

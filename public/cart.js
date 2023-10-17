@@ -38,8 +38,8 @@ const update = async () => {
     const elementProductList = document.getElementById("productList")
     if (elementProductList == undefined) return
 
-    const cartRequest = await fetch(`/api/carts/${sessionStorage.getItem("userCart")}`)
-    const cartpriceRequest = await fetch(`/api/carts/bills/${sessionStorage.getItem("userCart")}`)
+    const cartRequest = await fetch(`/api/carts/${localStorage.getItem("userCart")}`)
+    const cartpriceRequest = await fetch(`/api/carts/bills/${localStorage.getItem("userCart")}`)
     const cartResponse = await cartRequest.json()
     const cartpriceResponse = await cartpriceRequest.json()
 
@@ -104,38 +104,38 @@ const update = async () => {
         
         checkoutButton.textContent = `TOTAL TO PAY ${ConvertPrice(cartpriceResponse.price, ".")}`
         del.addEventListener("click", async () => {
-            const req = await fetch(`/api/carts/${sessionStorage.getItem("userCart")}/product/${productData._id}/${e.units}`, {
+            const req = await fetch(`/api/carts/${localStorage.getItem("userCart")}/product/${productData._id}/${e.units}`, {
                 method: "DELETE"
             })
             const response = await req.json()
             
             if (req.status == 200) {
                 update()
-                socket.emit("getCartContent", sessionStorage.getItem("userCart"))
+                socket.emit("getCartContent", localStorage.getItem("userCart"))
             }
         })
 
         remove.addEventListener("click", async () => {
-            const req = await fetch(`/api/carts/${sessionStorage.getItem("userCart")}/product/${productData._id}/${1}`, {
+            const req = await fetch(`/api/carts/${localStorage.getItem("userCart")}/product/${productData._id}/${1}`, {
                 method: "DELETE"
             })
             const response = await req.json()
 
             if (req.status == 200) {
                 update()
-                socket.emit("getCartContent", sessionStorage.getItem("userCart"))
+                socket.emit("getCartContent", localStorage.getItem("userCart"))
             }
         })
 
         add.addEventListener("click", async () => {
-            const req = await fetch(`/api/carts/${sessionStorage.getItem("userCart")}/product/${productData._id}/${1}`, {
+            const req = await fetch(`/api/carts/${localStorage.getItem("userCart")}/product/${productData._id}/${1}`, {
                 method: "PUT"
             })
             const response = await req.json()
 
             if (req.status == 200) {
                 update()
-                socket.emit("getCartContent", sessionStorage.getItem("userCart"))
+                socket.emit("getCartContent", localStorage.getItem("userCart"))
             }
         })
 

@@ -183,7 +183,7 @@ const createView = async () => {
     })
 
     prodAddButton.addEventListener("click", async () => {
-        const request = await fetch(`/api/carts/${sessionStorage.getItem("userCart")}/product/${pid}/${currentAmount}`, {
+        const request = await fetch(`/api/carts/${localStorage.getItem("userCart")}/product/${pid}/${currentAmount}`, {
             method: "PUT",
             body: JSON.stringify({ units: currentAmount }),
             headers: {
@@ -193,7 +193,7 @@ const createView = async () => {
         const response = await request.json()
 
         if (request.status == 200) {
-            socket.emit("getCartContent", sessionStorage.getItem("userCart"))
+            socket.emit("getCartContent", localStorage.getItem("userCart"))
             Swal.fire({
                 title: currentAmount == 1 ? `Product added successfully` : `${currentAmount} Products added successfully`,
                 icon: 'error',
