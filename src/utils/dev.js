@@ -1,6 +1,4 @@
-// funciones utiles para el desarrollador
-
-const ConvertPrice = (amount, add) => {// recibe dos valores: un numero y un texto para agregar entre separaciones (Esto para convertir el amount en un texto mas bonito para el usuario)
+const ConvertPrice = (amount, add) => {
     try {
         amount = Number(amount)
 
@@ -25,7 +23,7 @@ const ConvertPrice = (amount, add) => {// recibe dos valores: un numero y un tex
         } else {
             text = String(entero) 
         }
-        if (centavos != 0)  text += "," + (String(centavos) + "0").substring(2, 4) // esta mezcla toda rara es para evitar el .555555555555 y el 0.5 para que finalize en "0.55" y "0.50"}
+        if (centavos != 0)  text += "," + (String(centavos) + "0").substring(2, 4)
         text = "$ " + text
         return text
     } catch(err) {
@@ -39,7 +37,7 @@ const ConvertProduct = prod => {
     return prod
 }
 
-const ProductsArrayConvert = arr => { // ordena el array en productos con stock y productos sin stock
+const ProductsArrayConvert = arr => {
 
     const stockProducts = []
     const nostockProducts = []
@@ -56,6 +54,3 @@ const ProductsArrayConvert = arr => { // ordena el array en productos con stock 
     return [...stockProducts, ...nostockProducts]
 }
 export { ConvertProduct, ProductsArrayConvert }
-
-// tal vez te estes preguntando que es esto.
-// es para el envio de productos al render y que lo pueda tomar bien
