@@ -97,10 +97,6 @@ router.get('/github', passport.authenticate('github', { scope: ['user:mail'] }),
 router.get('/github/callback', passport.authenticate('github', { failureRedirect: 'api/auth/fail-register' }), generatejwt, (req, res) => {
     //req.session.user = req.user
 
-    console.log(req.params)
-    console.log(req.query)
-    console.log(req.user)
-    console.log(req.token)
     return res.status(302).cookie("token", req.token, { maxAge: 1000 * 60 * 60 * 24 * 7, httpOnly: true }).redirect("/perfil")
     //return res.redirect("/perfil")
 
