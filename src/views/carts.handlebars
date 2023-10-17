@@ -7,12 +7,7 @@
     </div>
     <div>
         <img src={{photo}} alt="Avatar" class="avatar">
-        <h2>{{name}}
-            {{#if last_name}}
-            {{last_name}}
-            {{else}}
-            Apellido desconocido</h2>
-        {{/if}}
+        <h2>{{fullname}}
     </div>
 </div>
 <div class="container">
@@ -37,5 +32,3 @@
 </div>
 
 <button id="checkoutButton" class="btn checkoutButton" type="button">CHECKOUT</button>
-
-<script src={{script2}}></script>

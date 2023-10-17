@@ -1,9 +1,6 @@
-
-const websiteUrl = 'http://localhost:3000'
-
 const checkoutButton = document.getElementById("checkoutButton")
 
-const ConvertPrice = (amount, add) => {// recibe dos valores: un numero y un texto para agregar entre separaciones (Esto para convertir el amount en un texto mas bonito para el usuario)
+const ConvertPrice = (amount, add) => {
     try {
         amount = Number(amount)
 
@@ -28,7 +25,7 @@ const ConvertPrice = (amount, add) => {// recibe dos valores: un numero y un tex
         } else {
             text = String(entero) 
         }
-        if (centavos != 0)  text += "," + (String(centavos) + "0").substring(2, 4) // esta mezcla toda rara es para evitar el .555555555555 y el 0.5 para que finalize en "0.55" y "0.50"}
+        if (centavos != 0)  text += "," + (String(centavos) + "0").substring(2, 4)
         text = "$ " + text
         return text
     } catch(err) {
@@ -41,13 +38,11 @@ const update = async () => {
     const elementProductList = document.getElementById("productList")
     if (elementProductList == undefined) return
 
-    //const productsRequest = await fetch(`${websiteUrl}/api/products`)
-    const cartRequest = await fetch(`${websiteUrl}/api/carts/${sessionStorage.getItem("userCart")}`)
-    const cartpriceRequest = await fetch(`${websiteUrl}/api/carts/bills/${sessionStorage.getItem("userCart")}`)
+    const cartRequest = await fetch(`/api/carts/${sessionStorage.getItem("userCart")}`)
+    const cartpriceRequest = await fetch(`/api/carts/bills/${sessionStorage.getItem("userCart")}`)
     const cartResponse = await cartRequest.json()
     const cartpriceResponse = await cartpriceRequest.json()
 
-    //if (productsRequest.status != 200) return
     if (cartRequest.status != 200) return
 
     while (elementProductList.firstChild) elementProductList.removeChild(elementProductList.firstChild);
@@ -98,7 +93,7 @@ const update = async () => {
         total.classList.add("totalText")
 
         img.classList.add("cartImageProduct")
-        img.src = productData.thumbnail
+        img.src = productData.thumbnail.substring(0, 7) == "/public" ? productData.thumbnail : `/public/img/${productData.thumbnail}`
 
         const calc = ConvertPrice(e.units*productData.price, ".")
         title.textContent = productData.title
@@ -108,9 +103,8 @@ const update = async () => {
         elementProductList.appendChild(divContainer)
         
         checkoutButton.textContent = `TOTAL TO PAY ${ConvertPrice(cartpriceResponse.price, ".")}`
-        console.log(productData)
         del.addEventListener("click", async () => {
-            const req = await fetch(`${websiteUrl}/api/carts/${sessionStorage.getItem("userCart")}/product/${productData._id}/${e.units}`, {
+            const req = await fetch(`/api/carts/${sessionStorage.getItem("userCart")}/product/${productData._id}/${e.units}`, {
                 method: "DELETE"
             })
             const response = await req.json()
@@ -122,7 +116,7 @@ const update = async () => {
         })
 
         remove.addEventListener("click", async () => {
-            const req = await fetch(`${websiteUrl}/api/carts/${sessionStorage.getItem("userCart")}/product/${productData._id}/${1}`, {
+            const req = await fetch(`/api/carts/${sessionStorage.getItem("userCart")}/product/${productData._id}/${1}`, {
                 method: "DELETE"
             })
             const response = await req.json()
@@ -134,7 +128,7 @@ const update = async () => {
         })
 
         add.addEventListener("click", async () => {
-            const req = await fetch(`${websiteUrl}/api/carts/${sessionStorage.getItem("userCart")}/product/${productData._id}/${1}`, {
+            const req = await fetch(`/api/carts/${sessionStorage.getItem("userCart")}/product/${productData._id}/${1}`, {
                 method: "PUT"
             })
             const response = await req.json()

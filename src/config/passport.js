@@ -55,24 +55,21 @@ export default function () {
     passport.use(
         'github',
         new GHStrategy(
-            { clientID: process.env.GITHUB_CLIENTID, clientSecret: process.env.GITHUB_SECRET, callbackURL: process.env.GITHUB_CALLBACK },
+            { clientID: process.env.GITHUB_CLIENTID, clientSecret: process.env.GITHUB_SECRET, callbackURL: process.env.GITHUB_CALLBACK, scope: ["user:email"] },
             async (accessToken, refreshToken, profile, done) => {
                 try {
-                    let one = await Users.findOne({ mail: profile._json.login })
-                    console.log(profile._json)
-                    console.log("gh strategy")
+                    let one = await Users.findOne({ mail: profile.emails[0].value, password: profile._json.id })
                     if (!one) {
                         let user = await Users.create({
                             first_name: profile._json.name || "Github User",
-                            last_name: "GitHub user", // hardcodeado por que no tira mas data gh
-                            mail: profile._json.login,
+                            last_name: "",
+                            mail: profile.emails[0].value,
                             age: 18,
                             photo: profile._json.avatar_url,
                             password: profile._json.id,
                             last_connection: Date.now(),
                             documents: []
                         })
-                        console.log(user)
                         return done(null, user)
                     }
                     return done(null, one)

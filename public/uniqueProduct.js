@@ -1,7 +1,4 @@
-
-const websiteUrl = 'http://localhost:3000'
-
-const ConvertPrice = (amount, add) => {// recibe dos valores: un numero y un texto para agregar entre separaciones (Esto para convertir el amount en un texto mas bonito para el usuario)
+const ConvertPrice = (amount, add) => {
     try {
         amount = Number(amount)
 
@@ -26,7 +23,7 @@ const ConvertPrice = (amount, add) => {// recibe dos valores: un numero y un tex
         } else {
             text = String(entero)
         }
-        if (centavos != 0) text += "," + (String(centavos) + "0").substring(2, 4) // esta mezcla toda rara es para evitar el .555555555555 y el 0.5 para que finalize en "0.55" y "0.50"}
+        if (centavos != 0) text += "," + (String(centavos) + "0").substring(2, 4)
         text = "$ " + text
         return text
     } catch (err) {
@@ -41,8 +38,6 @@ const adminButtons = async (parent) => {
 
     if (request.status == 200) {
         const json = await request.json()
-
-        console.log(json)
         if (json.success) {
             const prodEditButton = document.createElement("button")
 
@@ -148,7 +143,8 @@ const createView = async () => {
     prodAddButton.type = "button"
 
     prodImage.alt = response.title
-    prodImage.src = `/public/img/${response.thumbnail}`
+    const image = response.thumbnail.substring(0, 7) == "/public" ? response.thumbnail : `/public/img/${response.thumbnail}`
+    prodImage.src = image
 
     prodPrice.textContent = ConvertPrice(response.price, ".")
     prodTitle.textContent = response.title
@@ -173,7 +169,7 @@ const createView = async () => {
             const min = Math.min(max, response.stock, 9)
             currentAmount = min
 
-            prodAddButton.textContent = "ADD TO CART"//currentAmount == 1 ? `ADD 1 PRODUCT TO CART` : `ADD ${currentAmount} PRODUCTS TO CART`
+            prodAddButton.textContent = "ADD TO CART"
             addStockInput.value = currentAmount
         }
     }
@@ -187,8 +183,7 @@ const createView = async () => {
     })
 
     prodAddButton.addEventListener("click", async () => {
-        console.log(sessionStorage.getItem("userCart"))
-        const request = await fetch(`${websiteUrl}/api/carts/${sessionStorage.getItem("userCart")}/product/${pid}/${currentAmount}`, {
+        const request = await fetch(`/api/carts/${sessionStorage.getItem("userCart")}/product/${pid}/${currentAmount}`, {
             method: "PUT",
             body: JSON.stringify({ units: currentAmount }),
             headers: {

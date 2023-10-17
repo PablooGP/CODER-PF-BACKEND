@@ -11,7 +11,6 @@ class ProductRepository {
         return result 
     }
     createProduct = async () => {
-        // en el caso de usuario acá viene el dto para persistencia
         let result = await this.dao.create()
         return result 
     }

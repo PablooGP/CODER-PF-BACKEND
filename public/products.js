@@ -1,12 +1,10 @@
-const websiteUrl = 'http://localhost:3000'
-
 const urlParams = new URLSearchParams(window.location.search)
 const page = urlParams.get("page") || 1
 
 const previousPageButton = document.getElementById("previousPageButton")
 const nextPageButton = document.getElementById("nextPageButton")
 
-const ConvertPrice = (amount, add) => {// recibe dos valores: un numero y un texto para agregar entre separaciones (Esto para convertir el amount en un texto mas bonito para el usuario)
+const ConvertPrice = (amount, add) => {
     try {
         amount = Number(amount)
 
@@ -31,7 +29,7 @@ const ConvertPrice = (amount, add) => {// recibe dos valores: un numero y un tex
         } else {
             text = String(entero) 
         }
-        if (centavos != 0)  text += "," + (String(centavos) + "0").substring(2, 4) // esta mezcla toda rara es para evitar el .555555555555 y el 0.5 para que finalize en "0.55" y "0.50"}
+        if (centavos != 0)  text += "," + (String(centavos) + "0").substring(2, 4)
         text = "$ " + text
         return text
     } catch(err) {
@@ -42,7 +40,7 @@ const ConvertPrice = (amount, add) => {// recibe dos valores: un numero y un tex
 const updateView = async () => {
     console.log("upd view")
     console.log("viendo la pagina:", page)
-    const req = await fetch(`${websiteUrl}/api/products?page=${page}`, { method: "GET" })
+    const req = await fetch(`/api/products?page=${page}`, { method: "GET" })
     if (req.status != 200) return
     const response = await req.json()
 
@@ -89,7 +87,8 @@ const updateView = async () => {
         button.classList.add(e.stock > 0 ? "agregar-carrito" : "sin-stock")
         button.textContent = e.stock > 0 ? "AGREGAR AL CARRITO" : "SIN STOCK"
 
-        img.src = e.thumbnail
+        const image = e.thumbnail.substring(0, 7) == "/public" ? e.thumbnail : `/public/img/${e.thumbnail}`
+        img.src = image
         img.alt = e.title
         button.type = "button"
         h5.textContent = e.title
@@ -101,9 +100,7 @@ const updateView = async () => {
 
         anchor.href = `/products/${pid}`
         button.addEventListener("click", async (data) => {
-            console.log(sessionStorage.getItem("userCart"))
-            console.log(pid)
-            const request = await fetch(`${websiteUrl}/api/carts/${sessionStorage.getItem("userCart")}/product/${pid}/${units}`, {
+            const request = await fetch(`/api/carts/${sessionStorage.getItem("userCart")}/product/${pid}/${units}`, {
                 method: "PUT",
                 body: JSON.stringify({units: units}),
                 headers: {

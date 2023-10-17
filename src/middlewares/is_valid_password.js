@@ -5,8 +5,8 @@ export default async function(req,res,next) {
     let user =  await Users.findOne({ mail:req.body.mail })
     if (user) {
         let verified = compareSync(
-            req.body.password,      //lo que envía el cliente en el form
-            user.password           //lo que está guardado en mongo
+            req.body.password,
+            user.password
         )
 
         console.log("password is:", verified == true ? "correct" : "incorrect")

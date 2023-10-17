@@ -47,7 +47,6 @@ router.get(
                     last_name: 'Lopez',
                     photo: 'https://www.w3schools.com/howto/img_avatar.png',
                     title: 'index',
-                    script: '/public/conection.js',
                     token,
                     session: req.session,
                     accessLevel: req.accessLevel
@@ -96,7 +95,7 @@ router.get("/edit-product/:productId", product_edit, async (req, res, next) => {
             description,
             price,
             stock,
-            photo
+            thumbnail
         } = req.product
 
         return res.render("editProduct", {
@@ -105,8 +104,9 @@ router.get("/edit-product/:productId", product_edit, async (req, res, next) => {
             description,
             price,
             stock,
-            photo
+            thumbnail
         })
+
     } catch (err) {
         console.log(err);
         next(err);
@@ -119,9 +119,10 @@ router.get("/products/:pid", async (req, res, next) => {
             token
         } = req.cookies
         return res.render("view_product", {
-            script2: '/public/uniqueProduct.js',
+            scripts: [
+                '/public/uniqueProduct.js'
+            ],
             topTitle: "prueba",
-            conection: '/public/conection.js',
             session: req.session,
             token,
             accessLevel: req.accessLevel
@@ -155,7 +156,7 @@ router.get('/products', async (req, res, next) => {
 
         const formattedProducts = products.docs.map(product => ({
             title: product.title,
-            thumbnail: product.thumbnail,
+            thumbnail: product.thumbnail.substring(0, 7) == "/public" ? product.thumbnail : `/public/img/${product.thumbnail}`,
             price: product.price,
             link: `/products/${product._id}`
         }));
@@ -167,7 +168,6 @@ router.get('/products', async (req, res, next) => {
             title: 'Products Page',
             topTitle: `Total Products: ${products.totalDocs}`,
             limit: `Productos por pagina ${products.limit}`,
-            conection: '/public/conection.js',
             cart: 'numProducts',
             paginationprev: `${products.prevPage}`,
             paginationnext: `${products.nextPage}`,
@@ -194,7 +194,6 @@ router.get(
                 'new_product', {
                     title: 'new_product',
                     title: 'Product',
-                    conection: '/public/conection.js',
                     session: req.session,
                     accessLevel: req.accessLevel,
                     token
@@ -214,12 +213,14 @@ router.get(
             const {
                 token
             } = req.cookies
+
+            console.log(req.user)
             return res.render('carts', {
-                name: 'Nico',
-                last_name: 'Lopez',
-                photo: 'https://www.w3schools.com/howto/img_avatar.png',
-                script: "public/cart.js",
-                conection: '/public/conection.js',
+                fullname: req.user.first_name + " " + req.user.last_name,
+                photo: req.user.photo,
+                scripts: [
+                    "public/cart.js"
+                ],
                 session: req.session,
                 accessLevel: req.accessLevel,
                 token,
@@ -242,8 +243,9 @@ router.get(
             } = req.cookies
             return res.render('chat', {
                 title: 'Chat bot',
-                conection: '/public/conection.js',
-                script2: "public/chatbot.js",
+                scripts: [
+                    "public/chatbot.js",
+                ],
                 session: req.session,
                 accessLevel: req.accessLevel,
                 token,
@@ -264,7 +266,6 @@ router.get(
             return res.render(
                 'form', {
                     title: 'Form',
-                    conection: '/public/conection.js',
                     session: req.session,
                     accessLevel: req.accessLevel,
                     token,
@@ -286,7 +287,6 @@ router.get(
             return res.render(
                 'register', {
                     title: 'Register',
-                    conection: '/public/conection.js',
                     session: req.session,
                     accessLevel: req.accessLevel,
                     token,
@@ -312,7 +312,6 @@ router.get('/perfil', async (req, res) => {
             // Pasa el objeto `req.session` a la plantilla Handlebars
             token,
             title: 'perfil',
-            conection: '/public/conection.js',
             accessLevel: req.accessLevel,
             session: req.session
         });
@@ -330,8 +329,9 @@ router.get('/usuarios', async (req, res, next) => {
             title: 'Usuarios',
             token,
             users,
-            script: '/public/conection.js',
-            script2: "/public/usuarios.js",
+            scripts: [
+                "/public/usuarios.js"
+            ],
             session: req.session,
             accessLevel: req.accessLevel
         });

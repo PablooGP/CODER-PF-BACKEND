@@ -1,6 +1,5 @@
 import { Router } from "express"
 import Users from "../../dao/mongo/models/user.model.js"
-// import session from 'express-session';
 import isValidPassword from "../../middlewares/is_valid_password.js";
 import passport from "passport"
 import create_hash from "../../middlewares/create_hash.js";
@@ -39,8 +38,8 @@ router.post('/register',
     pass_is_8,
     create_hash,
     passport.authenticate(
-        'register',  // nombre de la estrategia a buscar
-        { failureRedirect: '' }  // objeto de configuracion de la ruta de redireccionamiento en caso de error
+        'register',
+        { failureRedirect: '' }
     ),
     (req, res) => {
         const { redirect } = req.query
@@ -97,6 +96,9 @@ router.get('/github', passport.authenticate('github', { scope: ['user:mail'] }),
 
 router.get('/github/callback', passport.authenticate('github', { failureRedirect: 'api/auth/fail-register' }), generatejwt, (req, res) => {
     //req.session.user = req.user
+
+    console.log(req.params)
+    console.log(req.query)
     console.log(req.user)
     console.log(req.token)
     return res.status(302).cookie("token", req.token, { maxAge: 1000 * 60 * 60 * 24 * 7, httpOnly: true }).redirect("/perfil")

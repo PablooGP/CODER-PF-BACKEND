@@ -1,6 +1,3 @@
-// import multer from 'multer'
-// import { __dirname } from '../utils/utils.js'
-
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import multer from 'multer';
@@ -44,10 +41,7 @@ const UserDocumentUploader = multer({
   }
 })
 
-// Define la ubicación donde deseas guardar las imágenes
 const uploadDirectory = join(__dirname, "..", 'public', 'img');
-
-// Configura multer para guardar las imágenes en esa ubicación
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, uploadDirectory);
