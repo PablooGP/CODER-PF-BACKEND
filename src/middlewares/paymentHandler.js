@@ -6,8 +6,8 @@ export default async (req, res, next) => {
         const { redirect, merchant_order_id, preference_id, payment_type, external_reference, payment_id, collection_id, status} = req.query
         // Se debe verificar el pago en mercadopago para que la database prueda procesarlo
         const pay = await MercadopagoPayment.searchPayment(`id=${payment_id}&external_reference=${external_reference}&limit=1`)
-
-        if (pay.success && pay.response.results[0] != null && pay.response.results[0].status == "approved") {
+        console.log(pay.response.results)
+        if (pay.success && pay.response.results[0] != null) {
             const paymentstatus = pay.response.results[0].status
             const ticket = await tickets.findById(external_reference)
             if (ticket == null) return res.status(404).json({
