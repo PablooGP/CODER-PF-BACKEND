@@ -18,12 +18,9 @@ const create_card = (firstname, lastname, role) => {
 
 const toggleRole = async (id) => {
     const req = await fetch(`/api/users/premium/${id}`, { method: "GET" })
-    console.log(req)
     if (req.status != 200) return
 
     const json = await req.json()
-    console.log(json)
-
     return json.success
 }
 

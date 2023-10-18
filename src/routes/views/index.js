@@ -217,7 +217,7 @@ router.get(
             console.log(req.user)
             return res.render('carts', {
                 fullname: req.user.first_name + " " + req.user.last_name,
-                photo: req.user.photo,
+                photo: req.user.photo.substring(0, 4) == "http" ? req.user.photo : "/public/img/" + req.user.photo,
                 scripts: [
                     "public/cart.js"
                 ],

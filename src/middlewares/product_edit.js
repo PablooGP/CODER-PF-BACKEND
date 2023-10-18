@@ -3,6 +3,9 @@ import Products from "../dao/mongo/models/product.model.js"
 
 export default async (req, res, next) => {
     try {
+        
+        if (req.user == null) throw new Error("Unknown user")
+        
         const { token } = req.cookies
         const { _id, role } = req.user
         const { productId } = req.params

@@ -32,13 +32,17 @@ router.get('/', async (req, res, next) => {
 router.get('/:cid', async (req, res, next) => {
     try {
         let id = req.params.cid
-        const one = await Carts.findById(id).populate({
+
+        const cart = await Carts.findById(id)
+        if (cart == null) return res.status(404).json({success: false, status: 404, message: "cart doesnt exist"})
+
+        const one = await cart.populate({
             path: 'products',
             populate: {
                 path: 'product',
                 model: "products"
             }
-        }).exec()
+        })
 
         one.products.sort((a, b) => {
             if (a.product.title < b.product.title) return -1
@@ -78,7 +82,8 @@ router.put("/:cid/product/:pid/:units", async (req, res, next) => {
         const cart = await Carts.findById(cid)
         const product = await Products.findById(id)
 
-        if (product.owner == req.user._id) {
+
+        if (req.user != null && product.owner == req.user._id) {
             return res.status(401).json({
                 success: false,
                 message: "[TRADUCIR ESTO]: No se puede añadir un producto de tu propiedad al carro"
@@ -112,7 +117,6 @@ router.put("/:cid/product/:pid/:units", async (req, res, next) => {
         next(error);
     }
 });
-
 
 router.delete('/:cid', async (req, res, next) => {
     try {
@@ -189,7 +193,10 @@ router.get("/bills/:cid", async (req, res, next) => {
 
 router.post("/:cid/purchase", async (req, res, next) => {
     try {
-        const cid = req.params.cid;
+        const { cid } = req.params
+        const { mail } = req.body
+
+        let usermail = mail
         const user = await Users.findOne();
 
         if (!user || !user.mail) {
@@ -242,14 +249,10 @@ router.post("/:cid/purchase", async (req, res, next) => {
                 purchaser: purchaser
             });
             await ticket.save();
-
-            console.log(ticket.toObject())
         }
 
         cart.products = failedItems.map(failedItem => failedItem.product);
         await cart.save();
-
-        console.log(cart.toObject())
 
         return res.status(200).json({
             message: "Purchase processed",

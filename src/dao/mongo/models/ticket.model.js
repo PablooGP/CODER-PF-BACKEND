@@ -1,27 +1,24 @@
-import mongoose from 'mongoose';
+import { Schema, Types, model } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
-import { v4 as uuidv4 } from 'uuid';
 
-const collection = 'ticket';
-const schema = new mongoose.Schema({
-    code: { type: String, required: true, unique: true },
-    purchase_datetime: { type: Date, default: Date.now },
-    amount: { type: Number, required: true },
-    purchaser: { type: String, required: true },
-});
+const schema = new Schema({
+    status: { type: String, required: true, default: "processing"},
+    purchase_external: { type: String, required: true, default: ""}, // El id creado por mercadopago para buscar el pago
+    purcharser: { type: String },
+    products: [{
+        product: {
+            type: Types.ObjectId,
+            ref: "products",
+            required: true
+        },
+        units: {
+            type: Number,
+            required: true
+        },
+        type: Object,
+    }]
+})
 
-schema.pre('validate', function(next) {
-    if (!this.isNew) {
-        next();
-        return;
-    }
+schema.plugin(mongoosePaginate)
 
-    this.code = uuidv4();
-    next();
-});
-
-schema.plugin(mongoosePaginate);
-
-const Tickets = mongoose.model(collection, schema);
-
-export default Tickets;
+export default model("ticket", schema)

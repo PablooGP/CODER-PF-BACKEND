@@ -1,6 +1,6 @@
 import Products from './models/product.model.js'
 
-const ConvertPrice = (amount, add) => {// recibe dos valores: un numero y un texto para agregar entre separaciones (Esto para convertir el amount en un texto mas bonito para el usuario)
+const ConvertPrice = (amount, add) => {
     try {
         amount = Number(amount)
 
@@ -25,7 +25,7 @@ const ConvertPrice = (amount, add) => {// recibe dos valores: un numero y un tex
         } else {
             text = String(entero) 
         }
-        if (centavos != 0)  text += "," + (String(centavos) + "0").substring(2, 4) // esta mezcla toda rara es para evitar el .555555555555 y el 0.5 para que finalize en "0.55" y "0.50"}
+        if (centavos != 0)  text += "," + (String(centavos) + "0").substring(2, 4)
         text = "$ " + text
         return text
     } catch(err) {
@@ -35,13 +35,10 @@ const ConvertPrice = (amount, add) => {// recibe dos valores: un numero y un tex
     
 const updateView = async () => {
     
-    const pageNumber = parseInt(req.query.page) || 1; // obtener el número de página de la solicitud
-    const productsPerPage = 5; // especificar la cantidad de productos por página
+    const pageNumber = parseInt(req.query.page) || 1;
+    const productsPerPage = 5;
 
-    const products = await Products.paginate({}, { page: pageNumber, limit: productsPerPage }); // realizar la consulta paginada con Mongoose
-
-    console.log(products)
-
+    const products = await Products.paginate({}, { page: pageNumber, limit: productsPerPage });
     const total_container = document.getElementById("containerElementos")
     
     response.forEach(e => {
@@ -89,8 +86,6 @@ const updateView = async () => {
 
         anchor.href = `/products/${pid}`
         button.addEventListener("click", async (data) => {
-            console.log(sessionStorage.getItem("userCart"))
-            console.log(pid)
             const request = await fetch(`${websiteUrl}/api/carts/${sessionStorage.getItem("userCart")}/product/${pid}/${units}`, {
                 method: "PUT",
                 body: JSON.stringify({units: units}),

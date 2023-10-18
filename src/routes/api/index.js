@@ -4,13 +4,14 @@ import carts_router from './carts.mongo.js';
 import products_router from './products.mongo.js';
 import auth_router from './auth.js';
 import users_router from "./users.js";
+import payments_router from "./payments.js"
 import jwt from "jsonwebtoken"; // Import the jwt module only once
 import nodemailer from "nodemailer";
 import { generateUser, generateProduct } from "../../utils/mocks/generateUserFake.js";
 import Users from "../../dao/mongo/models/user.model.js";
 import sendMail from "../../utils/sendMail.js"
 import { hashSync,genSaltSync, compareSync } from "bcrypt";
-import {config} from '../../config/config.js'
+import config from '../../config/config.js'
 
 const router = Router()
 const secretKey = process.env.JWT_SECRET;
@@ -20,6 +21,7 @@ router.use('/products', products_router)
 router.use('/carts', carts_router)
 router.use('/auth', auth_router)
 router.use("/users", users_router)
+router.use("/payments", payments_router)
 
 const transport = nodemailer.createTransport({
     service: 'gmail',

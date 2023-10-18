@@ -1,19 +1,17 @@
-// import { connect } from 'mongoose'
+
 import dotenv from 'dotenv';
 import { commander } from '../utils/commander.js';
 import MongoSingleton from './MongoSingleton.js';
-import 'dotenv/config.js';
+import path from "path"
+import { __dirname } from '../utils/utils.js';
 
-// console.log(commander.opts())
 const { mode } = commander.opts();
 
 dotenv.config({
-    path: mode === 'development' ? './.env.development' : './.env.production'
+    path: mode == 'development' ? path.join(__dirname, "..", '/.env.development') : path.join(__dirname, "..", '/.env.production')
 });
 
-// console.log(process.env.PERSISTENCE)
-
-export const config = {
+export default {
     twilio_sid: process.env.TWILIO_SID,
     twilio_token: process.env.TWILIO_AUTH_TOKEN,
     twilio_phone: process.env.TWILIO_PHONE_NUMBER,

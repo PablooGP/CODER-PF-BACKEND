@@ -5,7 +5,7 @@ import Users from "../../dao/mongo/models/user.model.js"
 import authorization from "../../middlewares/authorization.js";
 import nodemailer from "nodemailer";
 import sendMail from "../../utils/sendMail.js"
-import {config} from '../../config/config.js'
+import config from '../../config/config.js'
 import adminauth from "../../middlewares/adminAuth.js"
 import {UserDocumentUploader} from '../../middlewares/multer.js';
 

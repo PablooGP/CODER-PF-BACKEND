@@ -63,7 +63,6 @@ class Product {
             console.log(buscar);
             return buscar;
         }
-        console.log('not found');
         return 'Not found'
         } catch (error) {
         console.log(error);
@@ -96,7 +95,6 @@ class Product {
                 console.log('delete product: '+id)
                 return 200
             }
-            console.log('not found')
             return null
         } catch(error) {
             console.log(error)

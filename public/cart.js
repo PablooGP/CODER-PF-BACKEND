@@ -139,9 +139,25 @@ const update = async () => {
             }
         })
 
+
         separador.classList.add("separador")
         elementProductList.appendChild(separador)
     });
 }
+
+checkoutButton.addEventListener("click", async() => {
+    const req = await fetch(`/api/payments/payment-intent?cartId=${localStorage.getItem("userCart")}`, {
+        method: "POST"
+    })
+
+    if (req.status == 201) {
+        localStorage.removeItem("userCart")
+        const response = await req.json()
+        window.location.replace(response.response.redirect_url);
+    }
+    
+
+    console.log(response)
+})
 
 update()

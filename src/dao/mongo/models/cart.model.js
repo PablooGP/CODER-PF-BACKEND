@@ -10,7 +10,7 @@ const schema = new Schema({
         },
         units: {
             type: Number,
-            require: true
+            required: true
         },
         type: Object,
     }]

@@ -1,4 +1,5 @@
-import 'dotenv/config.js'
+import config from './config/config.js'
+
 import express from 'express'
 import router from './routes/index.js'
 import error_handler from './middlewares/error_handler.js'
@@ -11,7 +12,7 @@ import mongoStore from 'connect-mongo'
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
 import inicializePassport from './config/passport.js'
-import { config } from './config/config.js'
+
 import cors from 'cors'
 import { addLogger } from './utils/logger.js'
 import swaggerJsDoc from 'swagger-jsdoc';
@@ -52,8 +53,6 @@ const swaggerOptions = {
     apis: [`${__dirname}/docs/**/*.yaml`]
 };
 
-console.log(swaggerJsDoc.definition)
-
 const specs = swaggerJsDoc(swaggerOptions);
 
 server.use('/docs', SwaggerUiExpress.serve, SwaggerUiExpress.setup(specs));
@@ -66,7 +65,7 @@ server.use(express.json())
 server.use(addLogger)
 server.use('/', router)
 server.use(new_error_handler)
-server.use(error_handler) // Como agregamos un custom error tal vez este tengamos q borrarlo pero por el momento lo deje aca
+server.use(error_handler)
 server.use(not_found_handler)
 
 hbs.handlebars.registerHelper('if_eq', function (x, y, opts) {

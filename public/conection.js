@@ -1,5 +1,4 @@
 const socket = io()
-let currentCart = 1
 
 function emit_data() {
     socket.emit(
@@ -23,12 +22,32 @@ socket.on("userCartId", (cartId) => {
 })
 
 socket.emit("getCartContent", localStorage.getItem("userCart"))
-if (localStorage.getItem("userCart") == undefined) {
-    const req = fetch("/api/carts", {
-        method: "POST"
-    })
-    .then(res => res.json())
-    .then(response => {
-        localStorage.setItem("userCart", response.id)
-    })
+
+const updateCartId = async () => {
+
+    if (localStorage.getItem("userCart") == null) {
+        localStorage.removeItem("userCart")
+    }
+    
+    if (localStorage.getItem("userCart")) {
+        const req = await fetch(`/api/carts/${localStorage.getItem("userCart") }`, {
+            method: "GET",
+        })
+        if (req.status != 200 && req.status != 201) {
+            localStorage.removeItem("userCart")
+        }
+    }
+    
+    if (!localStorage.getItem("userCart")) {
+        const req = fetch("/api/carts", {
+            method: "POST"
+        })
+        .then(res => res.json())
+        .then(response => {
+            localStorage.setItem("userCart", response.id)
+        })
+    }
+    
 }
+
+updateCartId()

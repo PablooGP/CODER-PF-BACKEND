@@ -8,7 +8,7 @@ import {ProductImageUploader} from "../../middlewares/multer.js"
 import jwt from "jsonwebtoken"
 import nodemailer from "nodemailer"
 
-import { config } from "../../config/config.js"
+import config from "../../config/config.js"
 
 import Users from "../../dao/mongo/models/user.model.js"
 

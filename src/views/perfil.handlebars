@@ -39,11 +39,11 @@
 <h2 style="font-size:32px">Subir documentacion para ser un usuario verificado:</h2>
   <form action="/api/users/documents?redirect=true" method="post" enctype="multipart/form-data">
   <p>Foto frente del DNI</p>
-  <input placeholder="Foto DNI frente" type="file" class="input-form" id="dni-front" name="dni-front" required>
+  <input placeholder="Foto DNI frente" type="file" type="file" accept=".jpg, .png, .jpeg, .pdf" class="input-form" id="dni-front" name="dni-front" required>
   <p>Foto dorso del DNI</p>
-  <input placeholder="Foto DNI dorso" type="file" class="input-form" id="dni-back" name="dni-back" required>
+  <input placeholder="Foto DNI dorso" type="file" type="file" accept=".jpg, .png, .jpeg, .pdf" class="input-form" id="dni-back" name="dni-back" required>
   <p>Foto selfie sosteniendo el DNI</p>
-  <input placeholder="Foto Selfie" type="file" class="input-form" id="irl-user-photo" name="irl-user-photo" required>
+  <input placeholder="Foto Selfie" type="file" type="file" accept=".jpg, .png, .jpeg, .pdf" class="input-form" id="irl-user-photo" name="irl-user-photo" required>
   <button type="submit" <a class="btn agregar-carrito">Subir archivos</button>
   </form>
 {{/if}}

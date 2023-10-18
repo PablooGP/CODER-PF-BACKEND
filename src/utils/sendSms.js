@@ -1,5 +1,5 @@
 import twilio from "twilio";
-import { config } from '../config/config.js';
+import config from '../config/config.js';
 
 const { twilio_sid, twilio_token, twilio_phone, my_phone } = config;
 

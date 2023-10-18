@@ -6,23 +6,23 @@
                     <form id="product-form" action="/api/products", method="POST" enctype="multipart/form-data">
                         <fieldset class="mb-2">
                             <label for="productTitle" class="form-label">Title</label>
-                            <input type="text" class="form-control" name="title" id="title" />
+                            <input type="text" class="form-control" name="title" id="title" required/>
                         </fieldset>
                                 <fieldset class="mb-2">
                                     <label for="productDescription" class="form-label">Description</label>
-                                    <input type="text" class="form-control" name="description" id="description" />
+                                    <input type="text" class="form-control" name="description" id="description" required/>
                                 </fieldset>
                                 <fieldset class="mb-2">
                                     <label for="productPrice" class="form-label">Price</label>
-                                    <input type="number" class="form-control" name="price" id="price" />
+                                    <input type="number" class="form-control" name="price" id="price" required/>
                                 </fieldset>
                                 <fieldset class="mb-2">
                                     <label for="productStock" class="form-label">Stock</label>
-                                    <input type="number" class="form-control" name="stock" id="stock" />
+                                    <input type="number" class="form-control" name="stock" id="stock" required/>
                                 </fieldset>
                                 <div class="mb-2">
                                     <label for="productPhoto" class="form-label">Photo</label>
-                                    <input type="file" class="form-control" name="thumbnail" id="thumbnail" aria-describedby="photoSource"/>
+                                    <input type="file" accept=".jpg, .png, .jpeg" class="form-control" name="thumbnail" id="thumbnail" aria-describedby="photoSource"/ required>
                                 </div>
                                 <button id='newProduct' type="submit" class="btn btn-warning mt-2">Create Product</button>
                             </form>

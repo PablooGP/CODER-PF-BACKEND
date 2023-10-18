@@ -22,7 +22,18 @@ export default function () {
                 try {
                     let one = await Users.findOne({ mail: userName })
                     if (!one) {
-                        let user = await Users.create(req.body)
+                        
+                        const {first_name, last_name, mail, password} = req.body
+                        const file = req.file
+                        const imagename = file.filename
+
+                        let user = await Users.create({
+                            first_name,
+                            last_name,
+                            mail,
+                            password,
+                            photo: imagename
+                        })
                         return done(null, user)
                     }
                     return done(null, false)
@@ -51,7 +62,7 @@ export default function () {
             }
         )
     )
-
+    
     passport.use(
         'github',
         new GHStrategy(
@@ -62,7 +73,7 @@ export default function () {
                     if (!one) {
                         let user = await Users.create({
                             first_name: profile._json.name || "Github User",
-                            last_name: "",
+                            last_name: "GH",
                             mail: profile.emails[0].value,
                             age: 18,
                             photo: profile._json.avatar_url,

@@ -2,8 +2,7 @@ import Users from "../mongo/models/user.model.js";
 
 class UserManagerMongo {
     constructor() {
-        // Initialize the database
-        this.userModel = Users; // Use the correct class name here
+        this.userModel = Users;
     }
 
     static getUser = async (limit = 10, page = 1) => await Users.paginate({}, { limit, page, lean: true });

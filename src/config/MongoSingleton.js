@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
 
-//get http:// dominio.com
-
 class MongoSingleton {
     static #instance;
     constructor(){
-        mongoose.connect('mongodb+srv://lopeznicolas055:Caroso&narizota729@base-de-datos-nico.w4hipvq.mongodb.net/commerce');
+        mongoose.connect(process.env.LINK_MONGO);
     }
 
     static getInstance(){

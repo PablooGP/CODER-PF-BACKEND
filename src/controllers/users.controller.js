@@ -7,16 +7,9 @@ class UserController {
     }
     getUsers = async (req, res)=>{
         try {
-            // mongoose - paginate 
             const {page=1} = req.query
-            // let users = await userModel.paginate({}, {limit: 10, page: page, lean: true})
             let users = await this.userManager.get()
             const {docs, hasPrevPage, hasNextPage, prevPage, nextPage, totalPages} = users
-    
-            // if (!docs) {
-                
-            // }
-    
             res.send({
                 status: 'success',
                 users: docs,
@@ -58,14 +51,10 @@ class UserController {
     updateUsers = async (req, res) => {
         const { uid } = req.params
         const user = req.body
-    
-        // validar pid 
-        // if(!id)   
-        // validar campos 
+
         if(!user.nombre || !user.apellido){ 
             return res.status(400).send({status:'error', mensaje: 'todos los campos son necesarios'})
         }
-       
         let  userToReplace = {
             first_name: user.nombre,
             last_name: user.apellido,
@@ -84,8 +73,6 @@ class UserController {
     deleteUsers = async (req, res) => {
         try {
             let {uid} = req.params
-            // buscar por pid user
-        
             let result = await this.userManager.deleteOne({_id: uid})
             res.send({status: 'success', payload: result})
             

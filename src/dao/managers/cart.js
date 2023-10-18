@@ -23,7 +23,6 @@ class Cart {
     async add_cart() {
         try {
             let data = { products: [] }
-            //por ahora vacío y luego contendrá objetos con pid y quantity
             if (this.carts.length>0) {
                 let next_id = this.carts[this.carts.length-1].id+1
                 data.id = next_id
@@ -55,7 +54,7 @@ class Cart {
             let auxProduct = prod_manager.read_product(pid);
             if (auxProduct.stock < x || auxProduct.stock <= 0) return null
         
-            if (!auxCart) { // si no existe el carro con ese id directamente se agregara con el contenido y regresara todo ok.
+            if (!auxCart) {
                 this.carts.push({
                     id: auxProduct.id,
                     products: [
@@ -86,7 +85,6 @@ class Cart {
                 prod_manager.update_product(pid, element);
                 }
             }
-            // this.carts.push(auxCart);
             let data_json = JSON.stringify(this.carts, null, 2);
             await fs.promises.writeFile(this.path, data_json);
             return 200;

@@ -5,6 +5,14 @@ import multer from 'multer';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(dirname(__filename, '..'));
 
+const imagefilter = (req, file, cb) => {
+  if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+    cb(null, true)
+  } else {
+    cb(new Error('Please upload a valid image file'))
+  }
+}
+
 const ProductImageUploader = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
@@ -15,12 +23,7 @@ const ProductImageUploader = multer({
       return cb(null, req.user.id + "-" + file.fieldname + "." + arr[1])
     }
   }),
-  fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
-      return cb(new Error('Please upload a valid image file'))
-    }
-    cb(undefined, true)
-  }
+  fileFilter: imagefilter
 })
 
 const UserDocumentUploader = multer({
@@ -33,11 +36,12 @@ const UserDocumentUploader = multer({
       return cb(null, req.user.id + "-" + file.fieldname + "." + arr[1])
     }
   }),
-  fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(pdf|png|jpg|jpeg)$/)) {
-      return cb(new Error('Please upload a valid image file'))
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "application/pdf") {
+      cb(null, true)
+    } else {
+      cb(new Error('Please upload a valid image file'))
     }
-    cb(undefined, true)
   }
 })
 
@@ -51,7 +55,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage, fileFilter: imagefilter});
 
 export { __filename, __dirname, upload, UserDocumentUploader, ProductImageUploader };
 

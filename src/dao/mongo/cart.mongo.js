@@ -1,6 +1,3 @@
-/* The CartDaoMongo class provides methods for retrieving, creating, updating, and deleting carts in a
-MongoDB database. */
-
 import carts from "../mongo/models/cart.model.js"
 
 class CartDaoMongo {
