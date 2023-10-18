@@ -1,5 +1,6 @@
 
 import { MercadoPagoConfig, Payment, Preference, MerchantOrder } from "mercadopago/dist/src/index.js"
+import fetch from 'node-fetch';
 
 const client = new MercadoPagoConfig({ accessToken: process.env.MERCADOPAGO_ACCESSTOKEN });
 const preference = new Preference(client)
