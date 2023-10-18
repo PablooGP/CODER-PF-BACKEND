@@ -81,6 +81,8 @@ router.post("/mercadopago-webhook", async (req, res, next) => {
     try {
         const { id, topic } = req.query
 
+        console.log("se recibio una solicitud webhook")
+        console.log(req.query)
         if (topic == "payment") {
 
             // Se debe verificar el pago en mercadopago para que la database prueda procesarlo
