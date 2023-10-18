@@ -48,6 +48,15 @@ const updateCartId = async () => {
         })
     }
     
+    if (!localStorage.getItem("newSet")) {
+        try {
+            fetch("/api/auth/deleteCookies")
+            localStorage.setItem("newSet", 1)
+        } catch(err) {
+
+        }
+        
+    }
 }
 
 updateCartId()

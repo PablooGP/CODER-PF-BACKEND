@@ -51,6 +51,8 @@ export default function () {
             async (userName, password, done) => {
                 try {
                     let one = await Users.findOne({ mail: userName })
+
+                    if (one==null) return done("user doesnt exist", false)
                     one.last_connection = Date.now()
                     if (one) {
                         return done(null, one)

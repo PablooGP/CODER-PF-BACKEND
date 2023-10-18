@@ -92,6 +92,14 @@ router.post("/signout",
     }
 );
 
+router.get("/deleteCookies", (req, res, next) => {
+    if (req.cookies.token) {
+        console.log("hi")
+        res.clearCookie("token")
+        return res.redirect("/")
+    }
+})
+
 router.get('/github', passport.authenticate('github', { scope: ['user:mail'] }), (req, res) => { })
 
 router.get('/github/callback', passport.authenticate('github', { failureRedirect: 'api/auth/fail-register' }), generatejwt, (req, res) => {

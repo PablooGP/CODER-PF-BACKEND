@@ -20,7 +20,7 @@ const ProductImageUploader = multer({
     },
     filename: (req, file, cb) => {
       const arr = file.originalname.split(".")
-      return cb(null, req.user.id + "-" + file.fieldname + "." + arr[1])
+      return cb(null, req.user.id + "-" + "product-image" + "." + arr[1])
     }
   }),
   fileFilter: imagefilter
@@ -33,7 +33,7 @@ const UserDocumentUploader = multer({
     },
     filename: (req, file, cb) => {
       const arr = file.originalname.split(".")
-      return cb(null, req.user.id + "-" + file.fieldname + "." + arr[1])
+      return cb(null, req.user.id + "-" + "user-document" + "." + arr[1])
     }
   }),
   fileFilter: (req, file, cb) => {

@@ -103,15 +103,12 @@ router.post("/mercadopago-webhook", async (req, res, next) => {
                 ticket.status = paymentstatus
                 await ticket.save()
 
-                if (redirect != null && redirect == "true") {
-                    return res.redirect("/paymentStatus/" + external_reference)
-                } else {
-                    return res.status(200).json({
-                        success: true,
-                        status: 200,
-                        message: "new ticket status: " + paymentstatus
-                    })
-                }
+                return res.status(200).json({
+                    success: true,
+                    status: 200,
+                    message: "new ticket status: " + paymentstatus
+                })
+                
             } else {
                 return res.status(404).json({
                     success: false,

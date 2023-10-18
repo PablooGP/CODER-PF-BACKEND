@@ -1,4 +1,4 @@
-import { Router} from "express"
+import { Router } from "express"
 import Products from '../../dao/mongo/models/product.model.js'
 import Users from "../../dao/mongo/models/user.model.js"
 import passport_call from "../../middlewares/passport_call.js"
@@ -6,6 +6,9 @@ import authorization from "../../middlewares/authorization.js"
 import product_edit from "../../middlewares/product_edit.js"
 
 import jwt from "jsonwebtoken"
+import Tickets from "../../dao/mongo/models/ticket.model.js"
+
+import MercadopagoPayment from "../../service/mercadopago.js"
 
 const secretKey = process.env.JWT_SECRET;
 
@@ -43,14 +46,14 @@ router.get(
             const user = req.session
             return res.render(
                 'index', {
-                    name: 'Nico',
-                    last_name: 'Lopez',
-                    photo: 'https://www.w3schools.com/howto/img_avatar.png',
-                    title: 'index',
-                    token,
-                    session: req.session,
-                    accessLevel: req.accessLevel
-                }
+                name: 'Nico',
+                last_name: 'Lopez',
+                photo: 'https://www.w3schools.com/howto/img_avatar.png',
+                title: 'index',
+                token,
+                session: req.session,
+                accessLevel: req.accessLevel
+            }
             )
         } catch (error) {
             next(error)
@@ -192,12 +195,12 @@ router.get(
             } = req.cookies
             return res.render(
                 'new_product', {
-                    title: 'new_product',
-                    title: 'Product',
-                    session: req.session,
-                    accessLevel: req.accessLevel,
-                    token
-                }
+                title: 'new_product',
+                title: 'Product',
+                session: req.session,
+                accessLevel: req.accessLevel,
+                token
+            }
             )
         } catch (error) {
             next()
@@ -213,8 +216,6 @@ router.get(
             const {
                 token
             } = req.cookies
-
-            console.log(req.user)
             return res.render('carts', {
                 fullname: req.user.first_name + " " + req.user.last_name,
                 photo: req.user.photo.substring(0, 4) == "http" ? req.user.photo : "/public/img/" + req.user.photo,
@@ -265,11 +266,11 @@ router.get(
             } = req.cookies
             return res.render(
                 'form', {
-                    title: 'Form',
-                    session: req.session,
-                    accessLevel: req.accessLevel,
-                    token,
-                }
+                title: 'Form',
+                session: req.session,
+                accessLevel: req.accessLevel,
+                token,
+            }
             )
         } catch (error) {
             next()
@@ -286,11 +287,11 @@ router.get(
             } = req.cookies
             return res.render(
                 'register', {
-                    title: 'Register',
-                    session: req.session,
-                    accessLevel: req.accessLevel,
-                    token,
-                }
+                title: 'Register',
+                session: req.session,
+                accessLevel: req.accessLevel,
+                token,
+            }
             )
         } catch (error) {
             next()
@@ -340,6 +341,52 @@ router.get('/usuarios', async (req, res, next) => {
     }
 });
 
+router.get("/paymentStatus/:ticketid", async (req, res, next) => {
+    try {
+
+        const { ticketid } = req.params
+
+        const ticket = await Tickets.findById(ticketid)
+        if (ticket == null) return res.redirect("/")
+
+        const classTypes = {
+            ["approved"]: "paymentSuccess",
+
+            ["processing"]: "paymentUnpaid",
+            ["inprocess"]: "paymentUnpaid",
+
+            ["rejected"]: "paymentFailed",
+            ["cancelled"]: "paymentFailed",
+            ["refunded"]: "paymentFailed",
+            ["chargedback"]: "paymentFailed",
+
+            ["else"]: "paymentPending"
+        }
+
+        const search = await MercadopagoPayment.searchPayment(`external_reference=${ticket.id}&limit=5`)
+
+        if (!search.success || search.status != 200) return res.redirect("/")
+        if (search.response.results.length == 0) return res.redirect("/")
+
+        const pick = search.response.results[0]
+
+        return res.render('usuarios', {
+            layout: "paymentLayout",
+            title: 'Payment View',
+            css: "/public/extra.css",
+            ticketData: {
+                class: ("paymentFrame " + classTypes[ticket.status] || classTypes["else"]),
+                main: ticket.status == "approved" && "PAGO CONFIRMADO" || ticket.status == "rejected" && "PAGO RECHAZADO" || ticket.status == "cancelled" && "PAGO RECHAZADO" || ticket.status == "refunded" && "PAGO RECHAZADO" || ticket.status == "chargedback" && "PAGO RECHAZADO" || "PAGO PENDIENTE",
+                ticket: ticket.id,
+                id: pick.id
+            }
+        });
+
+
+    } catch (error) {
+        next(error);
+    }
+})
 
 
 
