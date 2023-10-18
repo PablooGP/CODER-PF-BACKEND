@@ -90,8 +90,9 @@ router.post("/mercadopago-webhook", async (req, res, next) => {
 
             console.log(pay)
             if (pay.success && pay.response.results[0] != null) {
-                const paymentstatus = pay.response.results[0].status
-                const ticket = await tickets.findById(external_reference)
+                const paymentres = pay.response.results[0]
+                const paymentstatus = paymentres.status
+                const ticket = await tickets.findById(paymentres.external_reference)
                 console.log("TICKET FOUND?", ticket)
                 if (ticket == null) return res.status(404).json({
                     success: false,
