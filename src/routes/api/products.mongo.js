@@ -126,7 +126,6 @@ router.get('/:pid', async (req, res, next) => {
     try {
         let id = String(req.params.pid)
         let product = await Products.findById(id).exec()
-        console.log(product)
         return res.status(200).json(product)
     } catch (error) {
         next(error)
@@ -147,13 +146,19 @@ router.put('/:pid', async (req, res, next) => {
     }
 })
 
-router.get('/edit/:productId', product_edit, async (req, res, next) => {
+router.post('/edit/:productId', product_edit, async (req, res, next) => {
     try {
+        const body = req.body
+        const { redirect } = req.query
         let id = String(req.params.productId)
-        let data = req.query
-        let response = await Products.findByIdAndUpdate(id, data)
+        let response = await Products.findByIdAndUpdate(id, body)
         if (response) {
-            return res.status(200).json({ message: 'product updated' })
+            console.log(redirect)
+            if (redirect == "true") {
+                return res.redirect("/products/" + id)
+            } else {
+                return res.status(200).json({ message: 'product updated' })
+            }
         }
         return res.status(400).json({ message: 'product not found' })
     } catch (error) {

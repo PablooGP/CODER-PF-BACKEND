@@ -101,13 +101,20 @@ router.get("/edit-product/:productId", product_edit, async (req, res, next) => {
             thumbnail
         } = req.product
 
+        const {
+            token
+        } = req.cookies
+
         return res.render("editProduct", {
             productid: _id,
             title,
             description,
             price,
             stock,
-            thumbnail
+            thumbnail,
+
+            token,
+            accessLevel: req.accessLevel
         })
 
     } catch (err) {
