@@ -2,7 +2,6 @@
 
 ## 📋 Trabajo de: 
 ### Pablo Lopez
-### Nicolas Lopez 
 
 ## COMO LEVANTAR EL SERVIDOR 💻
 
